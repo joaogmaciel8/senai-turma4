@@ -1,0 +1,6 @@
+cd \dev 
+git clone https://github.com/joaogmaciel8/senai-turma4.git
+enviar para o github
+git push -u origin main 
+apagar a pasta local 
+Remove-Item
