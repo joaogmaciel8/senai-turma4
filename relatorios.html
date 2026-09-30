@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Nike Store - Relatórios</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>NIKE STORE</h1>
+        <nav>
+            <a href="index.html">Catálogo</a>
+            <a href="relatorios.html">Relatórios de Vendas</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Relatório de Vendas</h2>
+        <br>
+        
+        <div class="filtro-box">
+            <div>
+                <label>Data Início:</label>
+                <input type="date" id="dataInicio">
+            </div>
+            <div>
+                <label>Data Fim:</label>
+                <input type="date" id="dataFim">
+            </div>
+            <div>
+                <button onclick="filtrarRelatorio()">Filtrar Vendas</button>
+            </div>
+        </div>
+
+        <div id="resumoMetricas" style="display:flex; gap:1rem; margin-bottom: 1rem;"></div>
+
+        <div class="grafico-box">
+            <h3>Vendas Comparativas dos 3 Produtos</h3>
+            <canvas id="graficoVendas"></canvas>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script> renderRelatorio(); </script>
+</body>
+</html>
