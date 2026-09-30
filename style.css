@@ -1,26 +1,256 @@
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-body { background-color: #f8f9fa; color: #111; }
+/* ===================================================
+   NIKE STORE - DESIGN RETRO ANOS 90 / STREETWEAR
+   =================================================== */
 
-header { background: #111; color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-header h1 { font-size: 1.5rem; letter-spacing: 2px; }
-nav a { color: #fff; text-decoration: none; margin-left: 1.5rem; font-weight: bold; }
-nav a:hover { color: #e52d27; }
+:root {
+    --primary: #ff0055;    /* Rosa Neon / Hot Pink */
+    --secondary: #00e5ff;  /* Cyan / Teal Elétrico */
+    --accent: #ffe600;     /* Amarelo Canário */
+    --purple: #7928ca;     /* Roxo Anos 90 */
+    --dark: #121212;       /* Preto Sólido */
+    --border-thick: 3px solid #121212;
+    --shadow-hard: 6px 6px 0px #121212;
+}
 
-.container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
-.grid-produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Impact', 'Arial Black', sans-serif; 
+}
 
-.card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; }
-.card img { width: 100%; height: 200px; object-fit: cover; border-radius: 6px; }
-.card h3 { margin: 1rem 0 0.5rem; font-size: 1.2rem; }
-.card p { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
-.preco { font-size: 1.3rem; font-weight: bold; color: #111; margin-bottom: 0.5rem; }
-.estoque { font-weight: bold; color: #28a745; margin-bottom: 1rem; }
-.estoque.esgotado { color: #dc3545; }
+body { 
+    /* Fundo geométrico pontilhado retro */
+    background-color: #2a0836;
+    background-image: radial-gradient(var(--secondary) 15%, transparent 16%), radial-gradient(var(--primary) 15%, transparent 16%);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+    color: var(--dark); 
+    padding-bottom: 3rem;
+}
 
-form { display: flex; gap: 0.5rem; }
-input[type="number"], input[type="date"] { padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; width: 100%; }
-button { background: #111; color: #fff; border: none; padding: 0.6rem 1rem; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; }
-button:hover { background: #e52d27; }
+/* Header Estilo Anos 90 */
+header { 
+    background: linear-gradient(90deg, var(--primary) 0%, var(--purple) 50%, var(--secondary) 100%);
+    border-bottom: 5px solid var(--dark);
+    padding: 1.5rem 2rem; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    box-shadow: 0px 8px 0px var(--accent);
+}
 
-.filtro-box { background: #fff; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; display: flex; gap: 1rem; align-items: flex-end; }
-.grafico-box { background: #fff; padding: 1.5rem; border-radius: 8px; margin-top: 2rem; }
+header h1 { 
+    font-size: 2.8rem; 
+    letter-spacing: 3px; 
+    color: var(--accent);
+    text-transform: uppercase;
+    text-shadow: 4px 4px 0px var(--dark);
+    transform: rotate(-2deg);
+}
+
+nav a { 
+    color: #ffffff; 
+    text-decoration: none; 
+    margin-left: 1rem; 
+    font-size: 1.2rem;
+    font-weight: bold; 
+    background: var(--dark);
+    padding: 0.6rem 1.2rem;
+    border: 2px solid var(--accent);
+    box-shadow: 4px 4px 0px var(--primary);
+    display: inline-block;
+    transition: all 0.1s ease;
+}
+
+nav a:hover { 
+    background: var(--accent);
+    color: var(--dark);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--primary);
+}
+
+/* Contentor Principal */
+.container { 
+    max-width: 1100px; 
+    margin: 3rem auto 0 auto; 
+    padding: 2rem; 
+    background: #ffffff;
+    border: var(--border-thick);
+    box-shadow: 12px 12px 0px var(--dark);
+}
+
+h2 {
+    font-size: 2.2rem;
+    color: var(--dark);
+    text-transform: uppercase;
+    background: var(--accent);
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    border: var(--border-thick);
+    box-shadow: 4px 4px 0px var(--primary);
+    transform: skew(-5deg);
+}
+
+/* Grid de Produtos e Cartões */
+.grid-produtos { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 2.5rem; 
+    margin-top: 2rem;
+}
+
+.card { 
+    background: #fff; 
+    border: var(--border-thick);
+    box-shadow: var(--shadow-hard);
+    padding: 1.2rem; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    position: relative;
+    transition: transform 0.15s ease;
+}
+
+.card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0px var(--secondary);
+}
+
+.card img { 
+    width: 100%; 
+    height: 210px; 
+    object-fit: cover; 
+    border: var(--border-thick);
+}
+
+.card h3 { 
+    margin: 1rem 0 0.3rem; 
+    font-size: 1.5rem; 
+    color: var(--purple);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card p { 
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 0.95rem; 
+    color: #222;
+    margin-bottom: 1rem; 
+    line-height: 1.3;
+}
+
+.preco { 
+    font-size: 1.8rem; 
+    font-weight: bold; 
+    color: var(--primary); 
+    background: var(--accent);
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border: 2px solid var(--dark);
+    width: fit-content;
+    margin-bottom: 0.8rem;
+    transform: rotate(-1deg);
+}
+
+.estoque { 
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.05rem;
+    font-weight: bold; 
+    color: #007700; 
+    margin-bottom: 1rem; 
+    background: #d4ffdb;
+    padding: 0.4rem;
+    border: 2px solid #007700;
+    text-align: center;
+}
+
+.estoque.esgotado { 
+    color: #ffffff; 
+    background: var(--primary);
+    border: 2px solid var(--dark);
+    text-transform: uppercase;
+    animation: piscar 1s infinite;
+}
+
+@keyframes piscar {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Formulários e Botões */
+form { 
+    display: flex; 
+    gap: 0.5rem; 
+}
+
+input[type="number"], input[type="date"] { 
+    font-family: 'Segoe UI', sans-serif;
+    padding: 0.6rem; 
+    border: var(--border-thick); 
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: #f8f8f8;
+    width: 100%; 
+}
+
+button { 
+    background: var(--secondary); 
+    color: var(--dark); 
+    border: var(--border-thick); 
+    padding: 0.7rem 1rem; 
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    cursor: pointer; 
+    font-weight: bold; 
+    width: 100%; 
+    box-shadow: 3px 3px 0px var(--dark);
+    transition: all 0.1s ease;
+}
+
+button:hover { 
+    background: var(--primary); 
+    color: #fff;
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--dark);
+}
+
+button:disabled {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+    border-color: #888;
+}
+
+/* Relatórios e Filtros */
+.filtro-box { 
+    background: var(--accent); 
+    border: var(--border-thick);
+    box-shadow: var(--shadow-hard);
+    padding: 1.5rem; 
+    margin-bottom: 2rem; 
+    display: flex; 
+    gap: 1rem; 
+    align-items: flex-end; 
+}
+
+.filtro-box label {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.grafico-box { 
+    background: #fff; 
+    border: var(--border-thick);
+    box-shadow: var(--shadow-hard);
+    padding: 1.5rem; 
+    margin-top: 2rem; 
+}
+
+.grafico-box h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    color: var(--purple);
+}
