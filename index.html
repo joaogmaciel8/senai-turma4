@@ -20,6 +20,7 @@
 <a href="relatorios.html" class="nav-link">Relatórios</a>
 </nav>
 <button class="cart-btn" onclick="toggleCart()">
+
                 🛒 Carrinho
 <span class="cart-count" id="cart-count">0</span>
 </button>
@@ -33,6 +34,7 @@
 </div>
  
         <main class="products-grid">
+<!-- PRODUTO 1: PIZZA -->
 <article class="product-card">
 <div class="image-container">
 <span class="badge">Fermentação 48h</span>
@@ -41,6 +43,7 @@
 <div class="card-content">
 <h3 class="product-title">Pizza Napoletana Tradizionale</h3>
 <div class="product-price">58,90 €</div>
+<span class="stock-tag in-stock" id="stock-pizza">Em stock: 50 un.</span>
 <div class="product-description">
 <ul>
 <li>Fermentação natural de 48 horas, leve e crocante.</li>
@@ -48,11 +51,12 @@
 <li>Manjericão fresco e azeite extra virgem.</li>
 </ul>
 </div>
-<button class="add-to-cart-btn" onclick="addToCart('pizza', 'Pizza Napoletana', 58.90, 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80')">Adi… ao Carrinho</button>
+<button class="add-to-cart-btn" id="btn-pizza" onclick="addToCart('pizza', 'Pizza Napoletana', 58.90, 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80', 50)">Adicionar ao Carrinho</button>
 </div>
 </article>
  
-            <article class="product-card">
+            <!-- PRODUTO 2: MACARRÃO -->
+<article class="product-card">
 <div class="image-container">
 <span class="badge">Massa Fresca</span>
 <img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281288?auto=format&fit=crop&w=800&q=80" alt="Spaghetto Bolognese">
@@ -60,6 +64,7 @@
 <div class="card-content">
 <h3 class="product-title">Spaghetto al Ragù Bolognese</h3>
 <div class="product-price">46,00 €</div>
+<span class="stock-tag in-stock" id="stock-macarrao">Em stock: 50 un.</span>
 <div class="product-description">
 <ul>
 <li>Massa fresca de sêmola de trigo duro.</li>
@@ -67,11 +72,12 @@
 <li>Servido com Parmigiano-Reggiano ralado na hora.</li>
 </ul>
 </div>
-<button class="add-to-cart-btn" onclick="addToCart('macarrao', 'Spaghetto Bolognese', 46.00, 'https://images.unsplash.com/photo-1621996346565-e3d5d6281288?auto=format&fit=crop&w=800&q=80')">Adi… ao Carrinho</button>
+<button class="add-to-cart-btn" id="btn-macarrao" onclick="addToCart('macarrao', 'Spaghetto Bolognese', 46.00, 'https://images.unsplash.com/photo-1621996346565-e3d5d6281288?auto=format&fit=crop&w=800&q=80', 50)">Adicionar ao Carrinho</button>
 </div>
 </article>
  
-            <article class="product-card">
+            <!-- PRODUTO 3: LASANHA -->
+<article class="product-card">
 <div class="image-container">
 <span class="badge">Gratinado Especial</span>
 <img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80" alt="Lasagna Classica">
@@ -79,6 +85,7 @@
 <div class="card-content">
 <h3 class="product-title">Lasagna Classica al Forno</h3>
 <div class="product-price">52,00 €</div>
+<span class="stock-tag in-stock" id="stock-lasanha">Em stock: 50 un.</span>
 <div class="product-description">
 <ul>
 <li>Camadas artesanais intercaladas com recheio rico.</li>
@@ -86,14 +93,15 @@
 <li>Gratinada com queijo parmesão e mozarela.</li>
 </ul>
 </div>
-<button class="add-to-cart-btn" onclick="addToCart('lasanha', 'Lasagna Classica', 52.00, 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80')">Adi… ao Carrinho</button>
+<button class="add-to-cart-btn" id="btn-lasanha" onclick="addToCart('lasanha', 'Lasagna Classica', 52.00, 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80', 50)">Adicionar ao Carrinho</button>
 </div>
 </article>
  
         </main>
 </div>
  
-    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <!-- PAINEL LATERAL DO CARRINHO DE COMPRAS -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
 <div class="cart-sidebar" id="cart-sidebar">
 <div class="cart-header">
 <h3>O Seu Pedido</h3>
@@ -115,3 +123,4 @@
     <script src="app.js"></script>
 </body>
 </html>
+ 
