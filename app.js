@@ -83,3 +83,9 @@ function checkout() {
     updateCartUI();
     toggleCart();
 }
+// Estado inicial do stock em memória (50 unidades para cada produto)
+const productsStock = {
+    'pizza': 50,
+    'macarrao': 50,
+    'lasanha': 50
+};
