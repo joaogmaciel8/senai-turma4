@@ -6,7 +6,7 @@ const produtosIniciais = [
         custo: 80.00, 
         preco: 199.90, 
         estoque: 50, 
-        img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop" 
+        img: "https://www.sportbras.com.br/camiseta-masculina-nike-dri-fit-preta/p?srsltid=AU7gw4Vu3RB8ke0DVXg3palh21zajfVoWxbt6W2pF68IfuCcM0s_xnFK" 
     },
     { 
         codigo: 'NK-HD-002', 
@@ -15,7 +15,7 @@ const produtosIniciais = [
         custo: 180.00, 
         preco: 399.90, 
         estoque: 30, 
-        img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=800&auto=format&fit=crop" 
+        img: "https://www.google.com/imgres?q=Moletom%20Nike%20Club%20Fleece&imgurl=https%3A%2F%2Fimgnike-a.akamaihd.net%2F1300x1300%2F0585281AA1.jpg&imgrefurl=https%3A%2F%2Fwww.nike.com.br%2Fblusao-nike-club-fleece-masculino-058528.html%3Fsrsltid%3DAU7gw4XmFqaEgrbQQnZVlIy7xccGOxjiB7Bsq296JQwcdPo7gbvMKBY1&docid=IUo85C1BaMhZJM&tbnid=qp3lPTdivZHEUM&vet=12ahUKEwij-534-5uXAxVHCbkGHVF3EWgQnPAOegUIsgIQAA..i&w=1300&h=1300&hcb=2&ved=2ahUKEwij-534-5uXAxVHCbkGHVF3EWgQnPAOegUIsgIQAA" 
     },
     { 
         codigo: 'NK-SNK-003', 
@@ -24,7 +24,7 @@ const produtosIniciais = [
         custo: 350.00, 
         preco: 699.90, 
         estoque: 40, 
-        img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop" 
+        img: "https://www.google.com/imgres?q=T%C3%AAnis%20Nike%20Air%20Force%201%20%2707&imgurl=https%3A%2F%2Fespacocon.fbitsstatic.net%2Fimg%2Fp%2Ftenis-nike-air-force-1-07-lv8-bege-preto-hq2037-200-164674%2F412019-1.jpg%3Fw%3D1200%26h%3D1200%26v%3D202606081958&imgrefurl=https%3A%2F%2Fwww.espacocon.com.br%2Fproduto%2Ftenis-nike-air-force-1-07-lv8-bege-preto-hq2037-200-164674%3Fsrsltid%3DAU7gw4UqLnsgHu3Fgy4y2rEWdTVzkeUBJgM_A78LWxBBSz4XqkAJbHIF&docid=jauXxVWoCshEDM&tbnid=9i9UzgMJR6_nRM&vet=12ahUKEwjM3biK_JuXAxUjBLkGHdoUHF0QnPAOegUIkgEQAA..i&w=1200&h=1200&hcb=2&ved=2ahUKEwjM3biK_JuXAxUjBLkGHdoUHF0QnPAOegUIkgEQAA" 
     }
 ];
  
