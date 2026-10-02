@@ -1,0 +1,55 @@
+Visão Geral do Sistema
+O sistema consiste numa plataforma web de gestão e vendas para uma loja da Nike, capaz de exibir 
+o catálogo com 3 produtos específicos, processar pedidos com baixa automática no estoque e gerar 
+relatórios analíticos de vendas (diário, semanal e mensal) acompanhados de gráficos comparativos. 
+Requisitos Funcionais (RF)
+RF01 – Cadastro de Produtos: O sistema deve manter o registo de 3 produtos com os campos: 
+código, nome, descrição, custo, valor de venda, estoque disponível e imagem. 
+RF02 – Exibição de Catálogo: A página principal deve apresentar os 3 produtos Nike em cards visuais 
+com fotos, detalhes e valor de venda. 
+RF03 – Processamento de Pedido: O cliente deve conseguir selecionar o produto e a quantidade 
+desejada através de um formulário de compra. 
+RF04 – Baixa de Estoque: Ao confirmar a compra, o sistema deve validar se há quantidade suficiente 
+em estoque e efetuar o abate automático no banco de dados. 
+RF05 – Filtro de Relatórios por Data: O painel de gestão deve permitir selecionar um intervalo de 
+datas para visualizar vendas diárias, semanais e mensais. 
+RF06 – Gráfico Comparativo: O sistema deve gerar um gráfico visual comparando a quantidade de 
+vendas efetuadas entre os 3 produtos no período filtrado. 
+Requisitos Não-Funcionais (RNF)
+RNF01 – Banco de Dados: Persistência de dados utilizando SQLite (critério de ponto extra). 
+RNF02 – Interface Web: Frontend construído com HTML5, CSS3 e JavaScript puro (ou com integração 
+leve via Fetch API/Node/Python). 
+RNF03 – Controle de Versão: Todo o código-fonte e documentos do projeto devem ser mantidos num 
+repositório Git com histórico de commits de todos os membros da equipe. 
+Módulo de Produtos e Stock
+RN-01 – Limite do Catálogo: O sistema deve manter exclusivamente 3 produtos ativos no catálogo 
+inicial. 
+RN-02 – Campos Obrigatórios do Produto: Todo o registo de produto deve conter obrigatoriamente 7 
+atributos: Código (chave primária única), Nome, Descrição, Custo (R$), Valor de Venda (R$), Stock 
+Disponível e Caminho da Imagem. 
+RN-03 – Validação de Margem de Lucro: O Valor de Venda deve ser estritamente superior ao Custo 
+($Valor\_Venda > Custo$). O sistema não deve permitir o registo de preços de venda inferiores ou 
+iguais ao custo de aquisição.
+RN-04 – Indicador de Esgotamento: Quando o Stock Disponível de um produto for igual a 0, o botão 
+de compra no ecrã de catálogo deve ser desativado automaticamente, exibindo o estado "Produto 
+Esgotado".
+Gestão e Cadastro de Produtos
+RN-01 (Limitação de Catálogo): O catálogo deve conter rigorosamente 3 produtos cadastrados e 
+ativos da marca Nike. 
+RN-02 (Atributos Obrigatórios): Todo produto deve ser registado com: código (único), nome, 
+descrição, custo (R$), valor de venda (R$), estoque disponível e imagem. 
+RN-03 (Validação Financeira): O valor de venda deve ser obrigatoriamente superior ao valor de custo 
+($Valor\_Venda > Custo$).
+RN-04 (Status de Esgotado): Quando o estoque disponível atingir 0, o produto deve ser assinalado 
+como "Esgotado" e ter o botão do formulário de pedido desativado.
+RN-08 (Sincronização Visual): A quantidade de estoque exibida na interface do catálogo deve ser 
+atualizada imediatamente após a conclusão do pedido.
+Relatórios e Análise de Vendas
+RN-09 (Filtro Personalizado): O painel de gestão deve permitir filtrar as vendas selecionando uma 
+data inicial e uma data final. 
+RN-10 (Agrupamento de Períodos): O sistema deve permitir visualizar o consolidado das vendas por 
+dia, por semana e por mês dentro do intervalo selecionado. 
+RN-11 (Métricas Chave): O relatório deve calcular automaticamente o Faturamento Total ($\sum 
+Valor\_Total$), o Lucro Bruto Total e a Quantidade Total de unidades vendidas.
+RN-12 (Gráfico Comparativo): O painel deve apresentar um gráfico visual (ex: barras) comparando a 
+quantidade de vendas efetuadas entre os 3 produtos Nike dentro do período filtrado.
