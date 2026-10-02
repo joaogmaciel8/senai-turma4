@@ -1,5 +1,12 @@
 let cart = [];
  
+// Estado inicial do stock em memória (Limite de 50 unidades para cada produto)
+const productsStock = {
+    'pizza': 50,
+    'macarrao': 50,
+    'lasanha': 50
+};
+ 
 function toggleCart() {
     const sidebar = document.getElementById('cart-sidebar');
     const overlay = document.getElementById('cart-overlay');
@@ -8,12 +15,20 @@ function toggleCart() {
     overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
 }
  
-function addToCart(id, name, price, img) {
+function addToCart(id, name, price, img, maxStock) {
+    const currentStock = productsStock[id] !== undefined ? productsStock[id] : maxStock;
     const existingItem = cart.find(item => item.id === id);
+    const currentQtyInCart = existingItem ? existingItem.qty : 0;
+ 
+    if (currentQtyInCart >= currentStock) {
+        alert(`Não é possível adicionar mais unidades. Stock disponível: ${currentStock}`);
+        return;
+    }
+ 
     if (existingItem) {
         existingItem.qty += 1;
     } else {
-        cart.push({ id, name, price, img, qty: 1 });
+        cart.push({ id, name, price, img, qty: 1, maxStock: currentStock });
     }
     updateCartUI();
     toggleCart();
@@ -22,6 +37,11 @@ function addToCart(id, name, price, img) {
 function changeQty(id, delta) {
     const item = cart.find(item => item.id === id);
     if (item) {
+        const currentStock = productsStock[id];
+        if (delta > 0 && item.qty >= currentStock) {
+            alert(`Atingiu o limite do stock disponível (${currentStock} un.).`);
+            return;
+        }
         item.qty += delta;
         if (item.qty <= 0) {
             cart = cart.filter(i => i.id !== id);
@@ -78,14 +98,39 @@ function checkout() {
         alert('O seu carrinho está vazio!');
         return;
     }
-    alert('Grazie mille! O seu pedido foi registado com sucesso.');
+ 
+    // Abater itens encomendados ao stock em memória
+    cart.forEach(item => {
+        if (productsStock[item.id] !== undefined) {
+            productsStock[item.id] -= item.qty;
+            updateStockDisplay(item.id);
+        }
+    });
+ 
+    alert('Grazie mille! O seu pedido foi registado e o stock foi atualizado.');
     cart = [];
     updateCartUI();
     toggleCart();
 }
-// Estado inicial do stock em memória (50 unidades para cada produto)
-const productsStock = {
-    'pizza': 50,
-    'macarrao': 50,
-    'lasanha': 50
-};
+ 
+function updateStockDisplay(id) {
+    const stockElement = document.getElementById(`stock-${id}`);
+    const btnElement = document.getElementById(`btn-${id}`);
+    const remaining = productsStock[id];
+ 
+    if (stockElement) {
+        if (remaining > 0) {
+            stockElement.innerText = `Em stock: ${remaining} un.`;
+            stockElement.className = 'stock-tag in-stock';
+        } else {
+            stockElement.innerText = 'Esgotado';
+            stockElement.className = 'stock-tag out-of-stock';
+        }
+    }
+ 
+    if (btnElement && remaining <= 0) {
+        btnElement.disabled = true;
+        btnElement.classList.add('disabled');
+        btnElement.innerText = 'Esgotado';
+    }
+}
