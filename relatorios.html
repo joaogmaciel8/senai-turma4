@@ -1,2 +1,211 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Nike Store - Analytics</title><link rel="stylesheet" href="style.css"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head><body><header class="header"><div class="header-container"><a href="index.html" class="logo">NIKE<span>/CORE</span></a><nav class="nav"><a href="index.html" class="nav-link">Catálogo</a><a href="relatorios.html" class="nav-link active">Relatórios</a></nav></div></header><main class="container"><section class="section-header"><h3>Dashboard Analytic</h3><span class="section-subtitle">Acompanhe métricas financeiras e fluxo de estoque</span></section><div class="filtro-box"><div class="campo-filtro"><label for="dataInicio">Data Inicial</label><input type="date" id="dataInicio" class="input-neutral"></div><div class="campo-filtro"><label for="dataFim">Data Final</label><input type="date" id="dataFim" class="input-neutral"></div><button onclick="filtrarRelatorio()" class="btn-secondary">Filtrar Período</button></div><div id="resumoMetricas" class="metricas-grid"></div><div class="chart-box"><h4>Volume de Vendas por Modelo</h4><canvas id="graficoVendas"></canvas></div><div class="tabela-box"><h4>Histórico Recente de Transações</h4><div class="table-responsive"><table><thead><tr><th>Data/Hora</th><th>Produto</th><th>Qtd</th><th>Total (R$)</th><th>Pagamento</th></tr></thead><tbody id="tabela-vendas-body"></tbody></table></div></div></main><script src="app.js"></script><script>        renderRelatorio();
-    </script></body></html>
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cucina della Nonna | Indústria Gastronómica Italiana</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+    <header>
+<div class="header-content">
+<div class="brand-logo">
+<div class="flag-bar"></div>
+<h1>Cucina della Nonna</h1>
+<span>Indústria Gastronómica Italiana</span>
+</div>
+<nav class="nav-menu">
+<a href="index.html" class="nav-link active">Catálogo</a>
+<a href="relatorios.html" class="nav-link">Relatórios</a>
+</nav>
+<button class="cart-btn" onclick="toggleCart()">
+
+                🛒 Carrinho
+<span class="cart-count" id="cart-count">0</span>
+</button>
+</div>
+</header>
+ 
+    <div class="container">
+<div class="hero-title">
+<h2>Nossa Linha de Produtos Artesanais</h2>
+<p>Receitas originais de família produzidas com ingredientes selecionados</p>
+</div>
+ 
+        <main class="products-grid">
+<article class="product-card">
+<div class="image-container">
+<span class="badge">Fermentação 48h</span>
+<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Pizza Napoletana">
+</div>
+<div class="card-content">
+<h3 class="product-title">Pizza Napoletana Tradizionale</h3>
+<div class="product-price">58,90 €</div>
+<div class="product-description">
+<ul>
+<li>Fermentação natural de 48 horas, leve e crocante.</li>
+<li>Molho San Marzano e Mozarela de Búfala pura.</li>
+<li>Manjericão fresco e azeite extra virgem.</li>
+</ul>
+</div>
+<button class="add-to-cart-btn" onclick="addToCart('pizza', 'Pizza Napoletana', 58.90, 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80')">Adi… ao Carrinho</button>
+</div>
+</article>
+ 
+            <article class="product-card">
+<div class="image-container">
+<span class="badge">Massa Fresca</span>
+<img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281288?auto=format&fit=crop&w=800&q=80" alt="Spaghetto Bolognese">
+</div>
+<div class="card-content">
+<h3 class="product-title">Spaghetto al Ragù Bolognese</h3>
+<div class="product-price">46,00 €</div>
+<div class="product-description">
+<ul>
+<li>Massa fresca de sêmola de trigo duro.</li>
+<li>Ragù tradicional cozinhado durante 6 horas.</li>
+<li>Servido com Parmigiano-Reggiano ralado na hora.</li>
+</ul>
+</div>
+<button class="add-to-cart-btn" onclick="addToCart('macarrao', 'Spaghetto Bolognese', 46.00, 'https://images.unsplash.com/photo-1621996346565-e3d5d6281288?auto=format&fit=crop&w=800&q=80')">Adi… ao Carrinho</button>
+</div>
+</article>
+ 
+            <article class="product-card">
+<div class="image-container">
+<span class="badge">Gratinado Especial</span>
+<img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80" alt="Lasagna Classica">
+</div>
+<div class="card-content">
+<h3 class="product-title">Lasagna Classica al Forno</h3>
+<div class="product-price">52,00 €</div>
+<div class="product-description">
+<ul>
+<li>Camadas artesanais intercaladas com recheio rico.</li>
+<li>Ragù à bolonhesa com molho Béchamel aveludado.</li>
+<li>Gratinada com queijo parmesão e mozarela.</li>
+</ul>
+</div>
+<button class="add-to-cart-btn" onclick="addToCart('lasanha', 'Lasagna Classica', 52.00, 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80')">Adi… ao Carrinho</button>
+</div>
+</article>
+ 
+        </main>
+</div>
+ 
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cart-sidebar">
+<div class="cart-header">
+<h3>O Seu Pedido</h3>
+<button class="close-cart" onclick="toggleCart()">&times;</button>
+</div>
+<div class="cart-items" id="cart-items">
+<p class="empty-cart-msg">O seu carrinho está vazio.</p>
+</div>
+ 
+        <div class="cart-footer">
+<div class="cart-total">
+<span>Total:</span>
+<span id="cart-total-price">0,00 €</span>
+</div>
+<button class="checkout-btn" onclick="checkout()">Finalizar Pedido</button>
+</div>
+</div>
+ 
+    <script src="app.js"></script>
+</body>
+</html>
+ 
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatórios | Cucina della Nonna</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+    <header>
+<div class="header-content">
+<div class="brand-logo">
+<div class="flag-bar"></div>
+<h1>Cucina della Nonna</h1>
+<span>Painel de Gestão & Relatórios</span>
+</div>
+<nav class="nav-menu">
+<a href="index.html" class="nav-link">Catálogo</a>
+<a href="relatorios.html" class="nav-link active">Relatórios</a>
+</nav>
+</div>
+</header>
+ 
+    <div class="container">
+<div class="hero-title">
+<h2>Relatório de Vendas e Desempenho</h2>
+<p>Métricas gerais dos pedidos registados na plataforma</p>
+</div>
+ 
+        <section class="kpi-grid">
+<div class="kpi-card">
+<h3>Total Faturado</h3>
+<p class="kpi-value" id="kpi-faturacao">1.568,90 €</p>
+</div>
+<div class="kpi-card">
+<h3>Total de Pedidos</h3>
+<p class="kpi-value" id="kpi-pedidos">32</p>
+</div>
+<div class="kpi-card">
+<h3>Produto Mais Vendido</h3>
+<p class="kpi-value" id="kpi-top-product">Pizza Napoletana</p>
+</div>
+</section>
+ 
+        <section class="table-container">
+<h3>Histórico Recente de Vendas</h3>
+<table class="report-table">
+<thead>
+<tr>
+<th>ID Pedido</th>
+<th>Cliente</th>
+<th>Itens</th>
+<th>Data</th>
+<th>Total</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody id="report-table-body">
+<tr>
+<td>#1001</td>
+<td>Maria Silva</td>
+<td>2x Pizza Napoletana</td>
+<td>02/10/2026</td>
+<td>117,80 €</td>
+<td><span class="status-badge success">Concluído</span></td>
+</tr>
+<tr>
+<td>#1002</td>
+<td>João Santos</td>
+<td>1x Spaghetto Bolognese</td>
+<td>02/10/2026</td>
+<td>46,00 €</td>
+<td><span class="status-badge success">Concluído</span></td>
+</tr>
+<tr>
+<td>#1003</td>
+<td>Ana Costa</td>
+<td>1x Lasagna Classica, 1x Pizza Napoletana</td>
+<td>01/10/2026</td>
+<td>110,90 €</td>
+<td><span class="status-badge warning">Em Preparação</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+ 
+    <script src="app.js"></script>
+</body>
+</html>
+ 
