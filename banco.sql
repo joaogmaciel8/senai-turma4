@@ -1,21 +1,48 @@
--- Estrutura da Base de Dados Relacional - Nike Core Store (SQLite)CREATE TABLE IF NOT EXISTS produtos (
-    codigo TEXT PRIMARY KEY,
-    nome TEXT NOT NULL,
-    descricao TEXT,
-    custo REAL NOT NULL,
-    valor_venda REAL NOT NULL,
-    estoque INTEGER NOT NULL,
-    imagem TEXT
+-- Criação da Base de Dados
+CREATE DATABASE IF NOT EXISTS cucina_della_nonna;
+USE cucina_della_nonna;
+ 
+-- Tabela de Produtos
+CREATE TABLE IF NOT EXISTS produtos (
+    id VARCHAR(50) PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    categoria VARCHAR(50),
+    imagem_url TEXT,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-CREATE TABLE IF NOT EXISTS vendas (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    codigo_produto TEXT NOT NULL,
-    quantidade INTEGER NOT NULL,
-    valor_total REAL NOT NULL,
-    forma_pagamento TEXT NOT NULL,
-    data_venda TEXT NOT NULL,
-    FOREIGN KEY (codigo_produto) REFERENCES produtos(codigo)
+ 
+-- Tabela de Clientes
+CREATE TABLE IF NOT EXISTS clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    telefone VARCHAR(20)
 );
--- Carga de dados inicial com novas imagens e produtosINSERT INTO produtos (codigo, nome, descricao, custo, valor_venda, estoque, imagem) VALUES('NK-TSH-001', 'Camiseta Nike Tech Fleece Core', 'Algodão premium encorpado com corte relaxed fit minimalista.', 80.00, 229.90, 45, 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop'),
-('NK-HD-002', 'Moletom Nike Solo Swoosh Hoodie', 'Design limpo, tecido denso e toque ultra suave interior.', 180.00, 449.90, 25, 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=800&auto=format&fit=crop'),
-('NK-SNK-003', 'Tênis Nike Air Force 1 ''07 Mono', 'Estética monocromática atemporal com couro de grão integral.', 350.00, 799.90, 35, 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=800&auto=format&fit=crop');
+ 
+-- Tabela de Pedidos
+CREATE TABLE IF NOT EXISTS pedidos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT,
+    valor_total DECIMAL(10, 2) NOT NULL,
+    estado VARCHAR(30) DEFAULT 'Em Preparação',
+    data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+ 
+-- Tabela de Itens do Pedido
+CREATE TABLE IF NOT EXISTS itens_pedido (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pedido_id INT,
+    produto_id VARCHAR(50),
+    quantidade INT NOT NULL,
+    preco_unitario DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
+    FOREIGN KEY (produto_id) REFERENCES produtos(id)
+);
+ 
+-- Inserção de Dados Iniciais
+INSERT INTO produtos (id, nome, preco, categoria, imagem_url) VALUES
+('pizza', 'Pizza Napoletana Tradizionale', 58.90, 'Pizza', 'https://images.unsplash.com/photo-1513104890138-7c749659a591'),
+('macarrao', 'Spaghetto al Ragù Bolognese', 46.00, 'Massa', 'https://images.unsplash.com/photo-1621996346565-e3d5d6281288'),
+('lasanha', 'Lasagna Classica al Forno', 52.00, 'Massa', 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3');
