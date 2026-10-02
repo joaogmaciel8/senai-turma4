@@ -1,26 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Nike Store - Catálogo</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Nike Store - Catálogo</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>NIKE STORE</h1>
-        <nav>
-            <a href="index.html">Catálogo</a>
-            <a href="relatorios.html">Relatórios de Vendas</a>
-        </nav>
-    </header>
-
+<header>
+<h1>NIKE STORE</h1>
+<nav>
+<a href="index.html">Catálogo</a>
+<a href="relatorios.html">Relatórios de Vendas</a>
+<button onclick="abrirCarrinho()" class="btn-carrinho-header">
+                🛒 Carrinho (<span id="cart-count">0</span>)
+</button>
+</nav>
+</header>
+ 
     <div class="container">
-        <h2>Catálogo de Produtos</h2>
-        <br>
-        <div id="grid-produtos" class="grid-produtos"></div>
-    </div>
-
+<h2>Catálogo de Produtos</h2>
+<br>
+<div id="grid-produtos" class="grid-produtos"></div>
+</div>
+ 
+    <!-- MODAL DO CARRINHO DE COMPRAS -->
+<div id="modal-carrinho" class="modal-overlay" style="display:none;">
+<div class="modal-content">
+<div class="modal-header">
+<h3>O Seu Carrinho</h3>
+<button onclick="fecharCarrinho()" class="btn-fechar">&times;</button>
+</div>
+<div id="itens-carrinho" class="carrinho-lista"></div>
+<div class="carrinho-footer">
+<div class="total-box">
+<span>Total:</span>
+<strong id="cart-total">R$ 0,00</strong>
+</div>
+<button onclick="finalizarCompraCarrinho()" class="btn-checkout">Finalizar Compra</button>
+</div>
+</div>
+</div>
+ 
     <script src="app.js"></script>
-    <script> renderCatalogo(); </script>
+<script>
+        renderCatalogo();
+        atualizarContadorCarrinho();
+</script>
 </body>
 </html>
