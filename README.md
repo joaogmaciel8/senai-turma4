@@ -1,5 +1,20 @@
-# 👟 Nike Store - Core Collection & Analytics
-Aplicação Web moderna desenvolvida com foco em estética minimalista e monocromática (cores neutras), apresentando catálogo de produtos, carrinho dinâmico com validação de estoque, multimétodos de pagamento e módulo analítico.
-## ✨ Destaques do Design Neutral Modern- **Estilo Minimalista Monocromático**: Cores em escala cinza/preto escuro com realces em branco.- **Imagens em Alta Resolução**: Fotografias de estilo *lifestyle* minimalista.- **Tipografia Moderna**: Utilização da fonte `Plus Jakarta Sans`.- **Efeitos de Vidro e Bordas Suaves**: Uso de `backdrop-filter` e microinterações fluídas.
-## 🚀 Funcionalidades- **Carrinho Modal Integrado**: Adição/remoção dinâmica de produtos.- **Checkout Multimétodo**: Suporte para Pix (5% OFF), Cartão de Crédito e Boleto.- **Relatório Financeiro com Chart.js**: Gráfico de barras monocromático e histórico de transações.- **Persistência Local**: Uso de `localStorage` para simulação completa de backend no navegador.
-## 🛠️ Tecnologias- **HTML5 & CSS3** (CSS Variables, Flexbox, Grid Layout & Modern Reset)- **JavaScript ES6**- **Chart.js**- **SQLite** (`banco.sql`)
+# 🍝 Cucina della Nonna - Sistema E-commerce & Gestão
+ 
+Sistema web completo para e-commerce de culinária italiana artesanal com painel de relatórios integrado.
+ 
+## 🚀 Tecnologias Utilizadas
+- **Frontend:** HTML5, CSS3, JavaScript (ES6)
+- **Base de Dados:** MySQL / MariaDB (`banco.sql`)
+ 
+## 📁 Estrutura do Projeto
+- `index.html`: Página do catálogo e carrinho de compras.
+- `relatorios.html`: Painel administrativo de vendas e métricas.
+- `style.css`: Estilização unificada do projeto.
+- `app.js`: Lógica do carrinho e interatividade.
+- `banco.sql`: Estrutura de tabelas e dados iniciais.
+- `documentação`: Manual de arquitetura do sistema.
+ 
+## 🛠️ Como Executar
+1. Clone o repositório ou descarregue a pasta do projeto.
+2. Abra o ficheiro `index.html` diretamente no navegador.
+3. Importe o ficheiro `banco.sql` no seu SGDB (MySQL/MariaDB) para persistência de dados no backend.
