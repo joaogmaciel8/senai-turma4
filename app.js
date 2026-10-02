@@ -6,7 +6,7 @@ const produtosIniciais = [
         custo: 80.00, 
         preco: 199.90, 
         estoque: 50, 
-        img: "https://www.sportbras.com.br/camiseta-masculina-nike-dri-fit-preta/p?srsltid=AU7gw4Vu3RB8ke0DVXg3palh21zajfVoWxbt6W2pF68IfuCcM0s_xnFK" 
+        img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop" 
     },
     { 
         codigo: 'NK-HD-002', 
@@ -15,7 +15,7 @@ const produtosIniciais = [
         custo: 180.00, 
         preco: 399.90, 
         estoque: 30, 
-        img: "https://www.google.com/imgres?q=Moletom%20Nike%20Club%20Fleece&imgurl=https%3A%2F%2Fimgnike-a.akamaihd.net%2F1300x1300%2F0585281AA1.jpg&imgrefurl=https%3A%2F%2Fwww.nike.com.br%2Fblusao-nike-club-fleece-masculino-058528.html%3Fsrsltid%3DAU7gw4XmFqaEgrbQQnZVlIy7xccGOxjiB7Bsq296JQwcdPo7gbvMKBY1&docid=IUo85C1BaMhZJM&tbnid=qp3lPTdivZHEUM&vet=12ahUKEwij-534-5uXAxVHCbkGHVF3EWgQnPAOegUIsgIQAA..i&w=1300&h=1300&hcb=2&ved=2ahUKEwij-534-5uXAxVHCbkGHVF3EWgQnPAOegUIsgIQAA" 
+        img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=800&auto=format&fit=crop" 
     },
     { 
         codigo: 'NK-SNK-003', 
@@ -24,7 +24,7 @@ const produtosIniciais = [
         custo: 350.00, 
         preco: 699.90, 
         estoque: 40, 
-        img: "https://www.google.com/imgres?q=T%C3%AAnis%20Nike%20Air%20Force%201%20%2707&imgurl=https%3A%2F%2Fespacocon.fbitsstatic.net%2Fimg%2Fp%2Ftenis-nike-air-force-1-07-lv8-bege-preto-hq2037-200-164674%2F412019-1.jpg%3Fw%3D1200%26h%3D1200%26v%3D202606081958&imgrefurl=https%3A%2F%2Fwww.espacocon.com.br%2Fproduto%2Ftenis-nike-air-force-1-07-lv8-bege-preto-hq2037-200-164674%3Fsrsltid%3DAU7gw4UqLnsgHu3Fgy4y2rEWdTVzkeUBJgM_A78LWxBBSz4XqkAJbHIF&docid=jauXxVWoCshEDM&tbnid=9i9UzgMJR6_nRM&vet=12ahUKEwjM3biK_JuXAxUjBLkGHdoUHF0QnPAOegUIkgEQAA..i&w=1200&h=1200&hcb=2&ved=2ahUKEwjM3biK_JuXAxUjBLkGHdoUHF0QnPAOegUIkgEQAA" 
+        img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop" 
     }
 ];
  
@@ -36,9 +36,24 @@ function getVendas() {
     return JSON.parse(localStorage.getItem('vendas_nike')) || [];
 }
  
-// Inicializa o localStorage caso esteja vazio
+function getCarrinho() {
+    return JSON.parse(localStorage.getItem('carrinho_nike')) || [];
+}
+ 
+function salvarCarrinho(carrinho) {
+    localStorage.setItem('carrinho_nike', JSON.stringify(carrinho));
+    atualizarContadorCarrinho();
+}
+ 
 if (!localStorage.getItem('produtos_nike')) {
     localStorage.setItem('produtos_nike', JSON.stringify(produtosIniciais));
+}
+ 
+function atualizarContadorCarrinho() {
+    const carrinho = getCarrinho();
+    const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+    const badge = document.getElementById('cart-count');
+    if (badge) badge.innerText = totalItens;
 }
  
 function renderCatalogo() {
@@ -60,42 +75,140 @@ function renderCatalogo() {
 <div class="estoque ${esgotado ? 'esgotado' : ''}">
                     ${esgotado ? 'PRODUTO ESGOTADO' : `Estoque disponível: ${p.estoque}`}
 </div>
-<form onsubmit="fazerPedido(event, '${p.codigo}')">
+<form onsubmit="adicionarAoCarrinho(event, '${p.codigo}')">
 <input type="number" id="qtd-${p.codigo}" min="1" max="${p.estoque}" value="1" ${esgotado ? 'disabled' : ''}>
-<button type="submit" ${esgotado ? 'disabled' : ''}>Comprar</button>
+<button type="submit" ${esgotado ? 'disabled' : ''}>Adicionar ao Carrinho</button>
 </form>
 </div>
         `;
     });
 }
  
-function fazerPedido(e, codigo) {
+function adicionarAoCarrinho(e, codigo) {
     e.preventDefault();
     const qtdInput = document.getElementById(`qtd-${codigo}`);
     const qtdPedida = parseInt(qtdInput.value);
  
-    let produtos = getProdutos();
-    let produto = produtos.find(p => p.codigo === codigo);
+    const produtos = getProdutos();
+    const produto = produtos.find(p => p.codigo === codigo);
+    const carrinho = getCarrinho();
  
-    if (qtdPedida > produto.estoque) {
-        alert("Quantidade solicitada é maior do que o estoque disponível!");
+    const itemExistente = carrinho.find(item => item.codigo === codigo);
+    const qtdAtualNoCarrinho = itemExistente ? itemExistente.quantidade : 0;
+ 
+    if (qtdPedida + qtdAtualNoCarrinho > produto.estoque) {
+        alert(`Quantidade excede o estoque disponível! Você já tem ${qtdAtualNoCarrinho} item(ns) no carrinho.`);
         return;
     }
  
-    produto.estoque -= qtdPedida;
-    localStorage.setItem('produtos_nike', JSON.stringify(produtos));
+    if (itemExistente) {
+        itemExistente.quantidade += qtdPedida;
+    } else {
+        carrinho.push({ codigo, quantidade: qtdPedida });
+    }
  
-    let vendas = getVendas();
-    vendas.push({
-        codigoProduto: codigo,
-        nomeProduto: produto.nome,
-        quantidade: qtdPedida,
-        valorTotal: qtdPedida * produto.preco,
-        data: new Date().toISOString()
+    salvarCarrinho(carrinho);
+    alert(`${produto.nome} adicionado ao carrinho!`);
+}
+ 
+function abrirCarrinho() {
+    const modal = document.getElementById('modal-carrinho');
+    if (modal) {
+        modal.style.display = 'flex';
+        renderCarrinho();
+    }
+}
+ 
+function fecharCarrinho() {
+    const modal = document.getElementById('modal-carrinho');
+    if (modal) modal.style.display = 'none';
+}
+ 
+function removerDoCarrinho(index) {
+    let carrinho = getCarrinho();
+    carrinho.splice(index, 1);
+    salvarCarrinho(carrinho);
+    renderCarrinho();
+}
+ 
+function renderCarrinho() {
+    const container = document.getElementById('itens-carrinho');
+    const totalSpan = document.getElementById('cart-total');
+    if (!container) return;
+ 
+    const carrinho = getCarrinho();
+    const produtos = getProdutos();
+ 
+    if (carrinho.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 2rem;">O seu carrinho está vazio.</p>';
+        if (totalSpan) totalSpan.innerText = 'R$ 0,00';
+        return;
+    }
+ 
+    let totalGeral = 0;
+    container.innerHTML = '';
+ 
+    carrinho.forEach((item, index) => {
+        const produto = produtos.find(p => p.codigo === item.codigo);
+        if (!produto) return;
+ 
+        const subtotal = produto.preco * item.quantidade;
+        totalGeral += subtotal;
+ 
+        container.innerHTML += `
+<div class="item-carrinho">
+<img src="${produto.img}" alt="${produto.nome}">
+<div class="item-info">
+<h4>${produto.nome}</h4>
+<p>R$ ${produto.preco.toFixed(2)} x ${item.quantidade}</p>
+<strong>Subtotal: R$ ${subtotal.toFixed(2)}</strong>
+</div>
+<button class="btn-remover" onclick="removerDoCarrinho(${index})">🗑️</button>
+</div>
+        `;
     });
-    localStorage.setItem('vendas_nike', JSON.stringify(vendas));
  
-    alert("Pedido realizado com sucesso!");
+    if (totalSpan) totalSpan.innerText = `R$ ${totalGeral.toFixed(2)}`;
+}
+ 
+function finalizarCompraCarrinho() {
+    const carrinho = getCarrinho();
+    if (carrinho.length === 0) {
+        alert("O seu carrinho está vazio!");
+        return;
+    }
+ 
+    let produtos = getProdutos();
+    let vendas = getVendas();
+ 
+    for (let item of carrinho) {
+        let produto = produtos.find(p => p.codigo === item.codigo);
+        if (!produto || item.quantidade > produto.estoque) {
+            alert(`Estoque insuficiente para ${produto ? produto.nome : item.codigo}!`);
+            return;
+        }
+    }
+ 
+    carrinho.forEach(item => {
+        let produto = produtos.find(p => p.codigo === item.codigo);
+        produto.estoque -= item.quantidade;
+ 
+        vendas.push({
+            codigoProduto: item.codigo,
+            nomeProduto: produto.nome,
+            quantidade: item.quantidade,
+            valorTotal: item.quantidade * produto.preco,
+            data: new Date().toISOString()
+        });
+    });
+ 
+    localStorage.setItem('produtos_nike', JSON.stringify(produtos));
+    localStorage.setItem('vendas_nike', JSON.stringify(vendas));
+    localStorage.removeItem('carrinho_nike');
+ 
+    atualizarContadorCarrinho();
+    fecharCarrinho();
+    alert("Compra realizada com sucesso!");
     renderCatalogo();
 }
  
