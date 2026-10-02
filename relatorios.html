@@ -3,126 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cucina della Nonna | Indústria Gastronómica Italiana</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
- 
-    <header>
-<div class="header-content">
-<div class="brand-logo">
-<div class="flag-bar"></div>
-<h1>Cucina della Nonna</h1>
-<span>Indústria Gastronómica Italiana</span>
-</div>
-<nav class="nav-menu">
-<a href="index.html" class="nav-link active">Catálogo</a>
-<a href="relatorios.html" class="nav-link">Relatórios</a>
-</nav>
-<button class="cart-btn" onclick="toggleCart()">
-
-                🛒 Carrinho
-<span class="cart-count" id="cart-count">0</span>
-</button>
-</div>
-</header>
- 
-    <div class="container">
-<div class="hero-title">
-<h2>Nossa Linha de Produtos Artesanais</h2>
-<p>Receitas originais de família produzidas com ingredientes selecionados</p>
-</div>
- 
-        <main class="products-grid">
-<article class="product-card">
-<div class="image-container">
-<span class="badge">Fermentação 48h</span>
-<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Pizza Napoletana">
-</div>
-<div class="card-content">
-<h3 class="product-title">Pizza Napoletana Tradizionale</h3>
-<div class="product-price">58,90 €</div>
-<div class="product-description">
-<ul>
-<li>Fermentação natural de 48 horas, leve e crocante.</li>
-<li>Molho San Marzano e Mozarela de Búfala pura.</li>
-<li>Manjericão fresco e azeite extra virgem.</li>
-</ul>
-</div>
-<button class="add-to-cart-btn" onclick="addToCart('pizza', 'Pizza Napoletana', 58.90, 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80')">Adi… ao Carrinho</button>
-</div>
-</article>
- 
-            <article class="product-card">
-<div class="image-container">
-<span class="badge">Massa Fresca</span>
-<img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281288?auto=format&fit=crop&w=800&q=80" alt="Spaghetto Bolognese">
-</div>
-<div class="card-content">
-<h3 class="product-title">Spaghetto al Ragù Bolognese</h3>
-<div class="product-price">46,00 €</div>
-<div class="product-description">
-<ul>
-<li>Massa fresca de sêmola de trigo duro.</li>
-<li>Ragù tradicional cozinhado durante 6 horas.</li>
-<li>Servido com Parmigiano-Reggiano ralado na hora.</li>
-</ul>
-</div>
-<button class="add-to-cart-btn" onclick="addToCart('macarrao', 'Spaghetto Bolognese', 46.00, 'https://images.unsplash.com/photo-1621996346565-e3d5d6281288?auto=format&fit=crop&w=800&q=80')">Adi… ao Carrinho</button>
-</div>
-</article>
- 
-            <article class="product-card">
-<div class="image-container">
-<span class="badge">Gratinado Especial</span>
-<img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80" alt="Lasagna Classica">
-</div>
-<div class="card-content">
-<h3 class="product-title">Lasagna Classica al Forno</h3>
-<div class="product-price">52,00 €</div>
-<div class="product-description">
-<ul>
-<li>Camadas artesanais intercaladas com recheio rico.</li>
-<li>Ragù à bolonhesa com molho Béchamel aveludado.</li>
-<li>Gratinada com queijo parmesão e mozarela.</li>
-</ul>
-</div>
-<button class="add-to-cart-btn" onclick="addToCart('lasanha', 'Lasagna Classica', 52.00, 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80')">Adi… ao Carrinho</button>
-</div>
-</article>
- 
-        </main>
-</div>
- 
-    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
-<div class="cart-sidebar" id="cart-sidebar">
-<div class="cart-header">
-<h3>O Seu Pedido</h3>
-<button class="close-cart" onclick="toggleCart()">&times;</button>
-</div>
-<div class="cart-items" id="cart-items">
-<p class="empty-cart-msg">O seu carrinho está vazio.</p>
-</div>
- 
-        <div class="cart-footer">
-<div class="cart-total">
-<span>Total:</span>
-<span id="cart-total-price">0,00 €</span>
-</div>
-<button class="checkout-btn" onclick="checkout()">Finalizar Pedido</button>
-</div>
-</div>
- 
-    <script src="app.js"></script>
-</body>
-</html>
- 
-<!DOCTYPE html>
-<html lang="pt-PT">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Relatórios | Cucina della Nonna</title>
+<title>Relatórios & Stock | Cucina della Nonna</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -143,8 +24,8 @@
  
     <div class="container">
 <div class="hero-title">
-<h2>Relatório de Vendas e Desempenho</h2>
-<p>Métricas gerais dos pedidos registados na plataforma</p>
+<h2>Relatório de Vendas e Inventário</h2>
+<p>Métricas de vendas e posição atual do stock de produtos</p>
 </div>
  
         <section class="kpi-grid">
@@ -157,12 +38,52 @@
 <p class="kpi-value" id="kpi-pedidos">32</p>
 </div>
 <div class="kpi-card">
-<h3>Produto Mais Vendido</h3>
-<p class="kpi-value" id="kpi-top-product">Pizza Napoletana</p>
+<h3>Capacidade Inicial por Produto</h3>
+<p class="kpi-value">50 un.</p>
 </div>
 </section>
  
-        <section class="table-container">
+        <!-- PAINEL DE INVENTÁRIO -->
+<section class="table-container" style="margin-bottom: 30px;">
+<h3>Controlo de Inventário de Produtos</h3>
+<table class="report-table">
+<thead>
+<tr>
+<th>ID</th>
+<th>Produto</th>
+<th>Preço Unitário</th>
+<th>Stock Inicial</th>
+<th>Estado do Inventário</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pizza</td>
+<td>Pizza Napoletana Tradizionale</td>
+<td>58,90 €</td>
+<td>50 un.</td>
+<td><span class="status-badge success">Normal</span></td>
+</tr>
+<tr>
+<td>macarrao</td>
+<td>Spaghetto al Ragù Bolognese</td>
+<td>46,00 €</td>
+<td>50 un.</td>
+<td><span class="status-badge success">Normal</span></td>
+</tr>
+<tr>
+<td>lasanha</td>
+<td>Lasagna Classica al Forno</td>
+<td>52,00 €</td>
+<td>50 un.</td>
+<td><span class="status-badge success">Normal</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+ 
+        <!-- HISTÓRICO DE VENDAS -->
+<section class="table-container">
 <h3>Histórico Recente de Vendas</h3>
 <table class="report-table">
 <thead>
@@ -208,4 +129,3 @@
     <script src="app.js"></script>
 </body>
 </html>
- 
