@@ -1,7 +1,7 @@
 # Calculadora elétrica básica
 # Fórmulas utilizadas: V = R * I e P = V * I
-
-
+ 
+ 
 def ler_numero(mensagem, minimo=0):
     """Lê um número e repete a pergunta até receber um valor válido."""
     while True:
@@ -13,33 +13,34 @@ def ler_numero(mensagem, minimo=0):
                 return valor
         except ValueError:
             print("Entrada inválida. Digite um número, por exemplo 12 ou 3,5.")
-
-
+ 
+ 
 print("=== CALCULADORA ELÉTRICA BÁSICA ===")
-
+ 
 while True:
     print("\nEscolha uma opção:")
     print("1 - Calcular tensão (V = R × I)")
     print("2 - Calcular potência (P = V × I)")
     print("0 - Sair")
-
+ 
     opcao = input("Opção: ").strip()
-
+ 
     if opcao == "1":
         resistencia = ler_numero("Resistência em ohms (Ω): ", minimo=0.000001)
         corrente = ler_numero("Corrente em ampères (A): ")
         tensao = resistencia * corrente
         print(f"Tensão: {tensao:.2f} V")
-
+ 
     elif opcao == "2":
         tensao = ler_numero("Tensão em volts (V): ")
         corrente = ler_numero("Corrente em ampères (A): ")
         potencia = tensao * corrente
         print(f"Potência: {potencia:.2f} W")
-
+ 
     elif opcao == "0":
         print("Programa encerrado. Obrigado por usar a calculadora!")
         break
-
+ 
     else:
         print("Opção não reconhecida. Escolha 1, 2 ou 0.")
+ 
