@@ -1,46 +1,314 @@
-# Calculadora elétrica básica
-# Fórmulas utilizadas: V = R * I e P = V * I
- 
- 
-def ler_numero(mensagem, minimo=0):
-    """Lê um número e repete a pergunta até receber um valor válido."""
-    while True:
-        try:
-            valor = float(input(mensagem).replace(",", "."))
-            if valor < minimo:
-                print(f"Digite um valor maior ou igual a {minimo}.")
-            else:
-                return valor
-        except ValueError:
-            print("Entrada inválida. Digite um número, por exemplo 12 ou 3,5.")
- 
- 
-print("=== CALCULADORA ELÉTRICA BÁSICA ===")
- 
-while True:
-    print("\nEscolha uma opção:")
-    print("1 - Calcular tensão (V = R × I)")
-    print("2 - Calcular potência (P = V × I)")
-    print("0 - Sair")
- 
-    opcao = input("Opção: ").strip()
- 
-    if opcao == "1":
-        resistencia = ler_numero("Resistência em ohms (Ω): ", minimo=0.000001)
-        corrente = ler_numero("Corrente em ampères (A): ")
-        tensao = resistencia * corrente
-        print(f"Tensão: {tensao:.2f} V")
- 
-    elif opcao == "2":
-        tensao = ler_numero("Tensão em volts (V): ")
-        corrente = ler_numero("Corrente em ampères (A): ")
-        potencia = tensao * corrente
-        print(f"Potência: {potencia:.2f} W")
- 
-    elif opcao == "0":
-        print("Programa encerrado. Obrigado por usar a calculadora!")
-        break
- 
-    else:
-        print("Opção não reconhecida. Escolha 1, 2 ou 0.")
- 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Eletrotécnica</title>
+    <style>
+        :root {
+            --bg-base: #f8fafc;
+            --card-bg: #ffffff;
+            --accent-primary: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: #eff6ff;
+            --border-soft: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --input-bg: #f1f5f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 32px 16px;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+            max-width: 960px;
+            width: 100%;
+        }
+
+        @media (max-width: 820px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+        }
+
+        .header-section {
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: var(--text-dark);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h1 span {
+            color: var(--accent-primary);
+        }
+
+        p.sub {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .menu-grid {
+            display: flex;
+            gap: 8px;
+            background: var(--input-bg);
+            padding: 4px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .btn-menu {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-menu.active {
+            background: var(--card-bg);
+            color: var(--accent-primary);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        .formula-box {
+            background: var(--accent-light);
+            border-left: 4px solid var(--accent-primary);
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--accent-hover);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border-soft);
+            color: var(--text-dark);
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            border-color: var(--accent-primary);
+            background: var(--card-bg);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .btn-calc {
+            width: 100%;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .btn-calc:hover {
+            background: var(--accent-hover);
+        }
+
+        .res-box {
+            margin-top: 20px;
+            padding: 16px;
+            background: var(--accent-light);
+            border: 1px solid var(--border-soft);
+            border-radius: 8px;
+            display: none;
+        }
+
+        .res-box span {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .res-box h2 {
+            font-size: 20px;
+            color: var(--accent-primary);
+            margin-top: 2px;
+        }
+
+        .side-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .side-card h3 {
+            font-size: 15px;
+            color: var(--text-dark);
+            border-bottom: 1px solid var(--border-soft);
+            padding-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .info-item {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .info-item strong {
+            color: var(--text-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- Calculadora Principal -->
+        <div class="card">
+            <div class="header-section">
+                <h1>⚡ <span>Eletro</span>Calc</h1>
+                <p class="sub">Ferramenta para cálculos elétricos rápidos e precisos</p>
+            </div>
+
+            <div class="menu-grid">
+                <button class="btn-menu active" onclick="setMode('tensao')">Tensão (V)</button>
+                <button class="btn-menu" onclick="setMode('corrente')">Corrente (I)</button>
+                <button class="btn-menu" onclick="setMode('resistencia')">Resistência (R)</button>
+                <button class="btn-menu" onclick="setMode('potencia')">Potência (P)</button>
+            </div>
+
+            <div class="formula-box" id="formula-display">
+                Fórmula: V = I × R
+            </div>
+
+            <form id="calc-form" onsubmit="calcular(event)">
+                <div class="group" id="group-1">
+                    <label id="lbl-input-1">Corrente (I) em Amperes</label>
+                    <input type="number" step="any" id="input-1" placeholder="Ex: 2.5" required>
+                </div>
+
+                <div class="group" id="group-2">
+                    <label id="lbl-input-2">Resistência (R) em Ohms</label>
+                    <input type="number" step="any" id="input-2" placeholder="Ex: 100" required>
+                </div>
+
+                <button type="submit" class="btn-calc">Calcular Resultado</button>
+            </form>
+
+            <div class="res-box" id="result-box">
+                <span>Resultado Encontrado</span>
+                <h2 id="result-value">0.00 V</h2>
+            </div>
+        </div>
+
+        <!-- Painel Lateral / Informações -->
+        <div class="side-card">
+            <h3>Guia Rápido</h3>
+            <div class="info-item">
+                <strong>Lei de Ohm:</strong> Relaciona a Tensão (V), Corrente (I) e Resistência (R) em um circuito elétrico de corrente contínua.
+            </div>
+            <div class="info-item">
+                <strong>Dica:</strong> Certifique-se de inserir os valores utilizando as unidades de medida padrão (V, A, Ω, W).
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'tensao';
+
+        const configs = {
+            tensao: { formula: 'Fórmula: V = I × R', label1: 'Corrente (I) - A', label2: 'Resistência (R) - Ω', unit: 'V' },
+            corrente: { formula: 'Fórmula: I = V / R', label1: 'Tensão (V) - V', label2: 'Resistência (R) - Ω', unit: 'A' },
+            resistencia: { formula: 'Fórmula: R = V / I', label1: 'Tensão (V) - V', label2: 'Corrente (I) - A', unit: 'Ω' },
+            potencia: { formula: 'Fórmula: P = V × I', label1: 'Tensão (V) - V', label2: 'Corrente (I) - A', unit: 'W' }
+        };
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.btn-menu').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cfg = configs[mode];
+            document.getElementById('formula-display').innerText = cfg.formula;
+            document.getElementById('lbl-input-1').innerText = cfg.label1;
+            document.getElementById('lbl-input-2').innerText = cfg.label2;
+            document.getElementById('result-box').style.display = 'none';
+        }
+
+        function calcular(e) {
+            e.preventDefault();
+            const val1 = parseFloat(document.getElementById('input-1').value);
+            const val2 = parseFloat(document.getElementById('input-2').value);
+            let res = 0;
+
+            if (currentMode === 'tensao') res = val1 * val2;
+            else if (currentMode === 'corrente') res = val1 / val2;
+            else if (currentMode === 'resistencia') res = val1 / val2;
+            else if (currentMode === 'potencia') res = val1 * val2;
+
+            document.getElementById('result-value').innerText = `${res.toFixed(2)} ${configs[currentMode].unit}`;
+            document.getElementById('result-box').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
